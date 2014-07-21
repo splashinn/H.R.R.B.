@@ -220,3 +220,15 @@ console.log(name);
 It will ask again and again until it gets something that is not an empty string.
 (Applying the ! operator will convert a value to Boolean type before negating it, and all strings except "" convert to true.)
 */
+
+
+// For loop examples:
+for (var i = 0; i <= 12; i = i + 2) {
+  console.log(i);
+} // -> 2, 4, 6, 8, 10, 12, ...
+/* The parentheses after a for keyword must contain two semicolons.
+The part before the first semicolon initializes the loop, usually by defining a variable.
+The second part is the expression that checks whether the loop must continue.
+The final part updates the state of the loop after every iteration. In most cases,
+this is shorter and clearer than a while construct.
+*/
