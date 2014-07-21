@@ -291,3 +291,7 @@ switch (prompt("What is the weather like?")) {
     console.log("Unknown weather type!");
     break;
 }
+
+
+
+// Chapter 3: Functions
