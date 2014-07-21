@@ -232,3 +232,33 @@ The second part is the expression that checks whether the loop must continue.
 The final part updates the state of the loop after every iteration. In most cases,
 this is shorter and clearer than a while construct.
 */
+
+var result = 1;
+for (var counter = 0; counter < 10; counter = counter + 1) {
+  result = result * 2;
+}
+console.log(result); // -> 1024
+
+
+
+// Breaking out a loop examples:
+// Having its condition produce false is not the only way a loop can finish.
+// There is a statement called break that has the effect of immediately jumping out of the enclosing loop.
+for (var current = 20; ; current++) {
+  if (current % 7 === 0) {
+    break;
+  }
+  console.log(current); // -> 21
+}
+
+
+
+// Updating variables succinctly
+// When looping, a program sometimes needs to update a variable w/ a value based on that variable's previous value.
+counter = counter + 1;
+// is the same as
+counter += 1;
+// This allows us to shorten our counting example a little more:
+for (var number = 0; number <= 12; counter += 2) {
+  console.log(number);
+}
