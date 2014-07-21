@@ -180,7 +180,7 @@ var number = 0;
 while (number <= 12) {
   console.log(number);
   number = number + 2;
-} //  -> 2, 4, 6, 8, 10, 12
+} //  -> 2, 4, 6, 8, 10, 12, etc.
 /* A statement starting with the keyword while creates a loop.
 The word while is followed by an expression in parentheses and then a statement, much like if.
 The loop executes that statement as long as the expression produces a value that is true when
@@ -190,4 +190,33 @@ In this loop, we want to both print the current number and add two to our variab
 Whenever we want to execute multiple statements inside a loop, we wrap them in braces ({ and }).
 Braces do for statements what parentheses do for expressions: they group them together, making them
 count as a single statement. A sequence of statements wrapped in braces is called a block.
+*/
+
+
+/* As an example that actually does something useful, we can now write a program that
+calculates and shows the value of 210 (2 to the 10th power). We use two variables:
+one to keep track of our result and one to count how often we have multiplied this result by 2.
+The loop tests whether the second variable has reached 10 yet and then updates both variables:
+*/
+var result = 1;
+var counter = 0;
+while (counter < 10) {
+  result = result * 2;
+  counter = counter + 1;
+}
+console.log(result); // -> 1024
+
+
+/* The do loop is a control structure similar to the while loop.
+It differs only on one point: a do loop always executes its body at least once,
+and it starts testing whether it should stop only after that first execution.
+To reflect this, the test appears after the body of the loop:
+*/
+do {
+  var name = prompt("Who are you?");
+} while (!name);
+console.log(name);
+/* This program will force you to enter a name.
+It will ask again and again until it gets something that is not an empty string.
+(Applying the ! operator will convert a value to Boolean type before negating it, and all strings except "" convert to true.)
 */
