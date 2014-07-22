@@ -382,3 +382,18 @@ var landscape = function() {
 };
 
 console.log(landscape());
+/* The flat and mountain functions can “see” the variable called result,
+since they are inside the function that defines it. But they cannot see each
+other’s count variables since they are outside each other’s scope.
+The environment outside of the landscape function doesn’t see any of
+the variables defined inside landscape.
+*/
+
+// In JS, functions are the only things that create a new scope. Free standing
+// blocks are allowed:
+var something = 1;
+{
+  var something = 2;
+  // Do stuff w/ variable something...
+}
+// Outside the block again...
