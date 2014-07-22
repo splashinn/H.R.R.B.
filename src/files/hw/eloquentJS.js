@@ -295,3 +295,60 @@ switch (prompt("What is the weather like?")) {
 
 
 // Chapter 3: Functions
+// Function example:
+var square = function(x) {
+  return x * x;
+};
+console.log(square(12)); // -> 144
+/* A function is created by an expression that starts with the keyword function.
+Functions have a set of parameters (in this case, only x) and a body, which contains
+the statements that are to be executed when the function is called. The function body
+must always be wrapped in braces, even when it consists of only a single statement.
+*/
+
+
+/* A function can have multiple parameters or no parameters at all.
+In the following example, makeNoise does not list any parameter names, whereas power lists two:
+*/
+var makeNoise() {
+  console.log("Pling!");
+};
+makeNoise(); // -> Pling!
+
+var power = function(base, exponent) {
+  var result = 1;
+  for (var count = 0; count < exponent; count++) {
+    result *= base;
+  }
+  return result;
+};
+console.log(power(2, 10)); // -> 1024
+
+
+// Parameters and Scope:
+/* The parameters to a function behave like regular variables, but their initial
+values are given by the caller of the function, not the code in the function itself.
+An important property of functions is that the variables created inside of them,
+including their parameters, are local to the function. This means, for example,
+that the result variable in the power example will be newly created every time the
+function is called, and these separate incarnations do not interfere with each other.
+
+This “localness” of variables applies only to the parameters and variables declared
+with the var keyword inside the function body. Variables declared outside of any function
+are called global, because they are visible throughout the program. It is possible to access
+such variables from inside a function, as long as you haven’t declared a local variable with the same name.
+*/
+// Example:
+var x = "outside";
+
+var f1 = function() {
+  var x = "inside f1";
+};
+f1();
+console.log(x); // → outside
+
+var f2 = function() {
+  x = "inside f2";
+};
+f2();
+console.log(x); // → inside f2
