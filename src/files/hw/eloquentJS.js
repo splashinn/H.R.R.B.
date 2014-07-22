@@ -528,3 +528,42 @@ function multiplier(factor) {
 }
 var twice = multiplier(2);
 console.log(twice(5)); // -> 10
+/* The explicit localVariable from the wrapValue example isn’t needed since a parameter is
+itself a local variable.
+
+Thinking about programs like this takes some exercise. A good mental model is to think
+of the function keyword as “freezing” the code in its body and wrapping it into a package
+(the function value). So when you read return function(...) {...}, think of it as returning
+a handle to a piece of computation being frozen for later use.
+
+In the example, multiplier returns a frozen chunk of code that gets stored in the twice variable.
+The last line then calls the value in this variable, causing the frozen code (return number * factor;)
+to be activated. It still has access to the factor variable from the multiplier call that created it,
+and in addition it gets access to the argument passed when unfreezing it, 5, through its number parameter.
+*/
+
+
+// Recursion
+function power(base, exponent) {
+  if (exponent === 0) {
+    return 1;
+  } else {
+    return base * power(base, exponent - 1);
+  }
+}
+console.log(power(2, 3)); // -> 8
+
+// Recursion example:
+function findSolution(target) {
+  function find(start, history) {
+    if (start === target) {
+      return history;
+    } else if (start > target) {
+      return null;
+    } else {
+      return find(start + 5, "(" + history + " + 5)") || find(start * 3, "(" + history + " * 3)");
+    }
+  }
+  return find(1, "1");
+}
+console.log(findSolution(24)); // -> (((1 * 3) + 5) * 3)
