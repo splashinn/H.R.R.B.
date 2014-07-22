@@ -423,8 +423,14 @@ if (safeMode)
 // Functions can be declared as:
 var kyle = function(name) {
   // code here
-}
+};
 // Or, functions can be declared as:
 function kyle(name) {
   // code here
+};
+
+// Another function example:
+function future() {
+  return "We STILL have no flying cars.";
 }
+console.log("The future says: ", future());
