@@ -420,3 +420,11 @@ if (safeMode)
 
 
 // Declaration Notation
+// Functions can be declared as:
+var kyle = function(name) {
+  // code here
+}
+// Or, functions can be declared as:
+function kyle(name) {
+  // code here
+}
