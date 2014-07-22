@@ -397,3 +397,26 @@ var something = 1;
   // Do stuff w/ variable something...
 }
 // Outside the block again...
+
+
+
+// Functions as Values
+/* Usually, function variables simply act as names for a specific piece of the program.
+The variables are defined once and never change. This makes it easy to start confusing
+the function and its name.
+But the two are different. A function value can do all the things that other values
+can do—you can use it in all kinds of expressions, not just call it. It is possible to
+store a function value in a new place, pass it as an argument to a function, and so on.
+Similarly, a variable that holds a function is still just a regular variable and can be
+assigned a new value, like so:
+*/
+var launchMissiles = function(value) {
+  missileSystem.launch("now");
+};
+if (safeMode)
+  launchMissiles = function(value) {
+    // do nothing
+  };
+
+
+// Declaration Notation
