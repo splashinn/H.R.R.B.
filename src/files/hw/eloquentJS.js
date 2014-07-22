@@ -352,3 +352,33 @@ var f2 = function() {
 };
 f2();
 console.log(x); // → inside f2
+
+
+// Nested Scope
+// JS distinguishes not just between global and local variables.
+// Functions can be created inside other functions, producing several
+// degrees of locality.
+
+// Example: This rather nonsensical function has two functions inside it:
+var landscape = function() {
+  var result = "";
+  var flat = function(size) {
+    for (var count = 0; count < size; count++)
+      result += "_";
+  };
+  var mountain = function(size) {
+    result += "/";
+    for (var count = 0; count < size; count++)
+      result += "'";
+    result += "\\";
+  };
+
+  flat(3);
+  mountain(4);
+  flat(6);
+  mountain(1);
+  flat(1);
+  return result;
+};
+
+console.log(landscape());
