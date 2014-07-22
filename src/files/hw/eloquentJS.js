@@ -567,3 +567,58 @@ function findSolution(target) {
   return find(1, "1");
 }
 console.log(findSolution(24)); // -> (((1 * 3) + 5) * 3)
+
+
+
+// Growing Functions
+// Example of a function w/ two arguments:
+function printFarmInventory(cows, chickens) {
+  var cowString = String(cows);
+  while (cowString.length < 3)
+    cowString = "0" + cowString;
+  console.log(cowString + " Cows");
+  var chickenString = String(chickens);
+  while (chickenString.length < 3)
+    chickenString = "0" + chickenString;
+  console.log(chickenString + " Chickens");
+}
+printFarmInventory(7, 11);
+
+// Adding another item to the function:
+
+function zeroPad(number, width) {
+  var string = String(number);
+  while (string.length < width)
+    string = "0" + string;
+  return string;
+}
+
+function printFarmInventory(cows, chickens, pigs) {
+  console.log(zeroPad(cows, 3) + " Cows");
+  console.log(zeroPad(chickens, 3) + " Chickens");
+  console.log(zeroPad(pigs, 3) + " Pigs");
+}
+printFarmInventory(7, 16, 3);
+
+
+/* A pure function is a specific kind of value-producing function that not only has no
+side effects but also doesn’t rely on side effects from other code—for example, it doesn’t
+read global variables that are occasionally changed by other code. A pure function has the
+pleasant property that, when called with the same arguments, it always produces the same value
+(and doesn’t do anything else). This makes it easy to reason about. A call to such a function
+can be mentally substituted by its result, without changing the meaning of the code. When you
+are not sure that a pure function is working correctly, you can test it by simply calling it
+and know that if it works in that context, it will work in any context. Nonpure functions might
+return different values based on all kinds of factors and have side effects that might be hard to
+test and think about.
+
+A key aspect in understanding functions is understanding local scopes. Parameters and variables
+declared inside a function are local to the function, re-created every time the function is called,
+and not visible from the outside. Functions declared inside another function have access to the outer
+function’s local scope.
+
+Separating the different tasks your program performs into different functions is helpful.
+You won’t have to repeat yourself so much, and they can help someone trying to read your program
+by grouping the code into conceptual chunks, in the same way that chapters and sections help
+organize regular text.
+*/
