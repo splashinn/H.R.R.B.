@@ -625,3 +625,58 @@ organize regular text.
 
 
 // Chapter 4: Data Structures: Objects and Arrays
+
+// Array Example:
+var listOfNumbers = [2, 3, 5, 7, 11];
+// To access an element of the array:
+console.log(listOfNumbers[1]); // -> 3
+// Keep in mind, the index starts at 0, not 1.
+console.log(listOfNumbers[1 - 1]); // -> 2
+
+// Properties
+/* We’ve seen a few suspicious-looking expressions like myString.length
+(to get the length of a string) and Math.max (the maximum function) in
+past examples. These are expressions that access a property of some value.
+In the first case, we access the length property of the value in myString.
+In the second, we access the property named max in the Math object
+(which is a collection of mathematics-related values and functions).
+
+Almost all JavaScript values have properties.
+The exceptions are null and undefined.
+If you try to access a property on one of these nonvalues, you get an error.
+
+The two most common ways to access properties in JavaScript are with a
+dot and with square brackets. Both value.x and value[x] access a property
+on value—but not necessarily the same property. The difference is in how x
+is interpreted. When using a dot, the part after the dot must be a valid variable name,
+and it directly names the property. When using square brackets, the expression
+between the brackets is evaluated to get the property name. Whereas value.x fetches
+the property of value named “x”, value[x] tries to evaluate the expression x
+and uses the result as the property name.
+*/
+
+// Using the above example:
+listOfNumbers.length; // -> 5
+
+
+// Methods
+// String and array objects contain a number of properties that refer to function values.
+var doh = "Doh";
+console.log(typeof doh.toUpperCase); // -> function
+console.log(doh.toUpperCase()); // -> DOH
+// We can also use toLowerCase property:
+console.log(doh.toLowerCase()); // -> doh
+
+// Example of methods that an array object has:
+var mack = [];
+mack.push("Mack");
+mack.push("the", "knife");
+console.log(mack); // -> ["Mack", "the", "knife"]
+console.log(mack.join(" ")); // -> Mack the knife
+console.log(mack.pop()); // -> knife
+console.log(mack); // -> ["Mack", "the"]
+/* The push method can be used to add values to the end of an array.
+The pop method does the opposite: it removes the value at the end of the array and returns it.
+An array of strings can be flattened to a single string with the join method.
+The argument given to join determines the text that is glued between the array’s elements.
+*/
