@@ -680,3 +680,33 @@ The pop method does the opposite: it removes the value at the end of the array a
 An array of strings can be flattened to a single string with the join method.
 The argument given to join determines the text that is glued between the array’s elements.
 */
+
+
+// Objects
+/* Values of the type object are arbitrary collections of properties,
+and we can add or remove these properties as we please. One way to create
+an object is by using a curly brace notation.
+*/
+var day1 = {
+  squirrel: false,
+  events: ["work", "touched tree", "pizza", "running", "television"]
+};
+console.log(day1.squirrel); // -> false
+console.log(day1.wolf); // -> undefined
+day1.wolf = false;
+console.log(day1.wolf); // -> false
+/* Inside the curly braces, we can give a list of properties separated by commas.
+Each property is written as a name, followed by a colon, followed by an expression
+that provides a value for the property. Spaces and line breaks are not significant.
+When an object spans multiple lines, indenting it like in the previous example improves
+readability. Properties whose names are not valid variable names or valid numbers have to be quoted.
+*/
+var descriptions = {
+  work: "Went to work",
+  "touched tree": "Touched a tree"
+};
+/* This means that curly braces have two meanings in JavaScript. At the start of a statement,
+they start a block of statements. In any other position, they describe an object. Fortunately,
+it is almost never useful to start a statement with a curly-brace object, and in typical programs,
+there is no ambiguity between these two uses.
+*/
