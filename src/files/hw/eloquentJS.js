@@ -710,3 +710,41 @@ they start a block of statements. In any other position, they describe an object
 it is almost never useful to start a statement with a curly-brace object, and in typical programs,
 there is no ambiguity between these two uses.
 */
+
+
+var anObject = {left: 1, right: 2};
+console.log(anObject.left); // → 1
+delete anObject.left;
+console.log(anObject.left); // → undefined
+console.log("left" in anObject); // → false
+console.log("right" in anObject); // → true
+/* The delete operator cuts off a leg from such an octopus. It is a unary operator that,
+when applied to a property access expression, will remove the named property from the object.
+This is not a common thing to do, but it is possible.
+
+The binary in operator, when applied to a string and an object, returns a Boolean value
+that indicates whether that object has that property. The difference between setting a property
+to undefined and actually deleting it is that, in the first case, the object still has the property
+(it just doesn’t have a very interesting value), whereas in the second case the property
+is no longer present and in will return false.
+
+Arrays, then, are just a kind of object specialized for storing sequences of things.
+If you evaluate typeof [1, 2], this produces "object". You can see them as long, flat
+octopuses with all their arms in a neat row, labeled with numbers.
+*/
+
+var journal = [
+  {events: ["work", "touched tree", "pizza",
+            "running", "television"],
+   squirrel: false},
+  {events: ["work", "ice cream", "cauliflower",
+            "lasagna", "touched tree", "brushed teeth"],
+   squirrel: false},
+  {events: ["weekend", "cycling", "break",
+            "peanuts", "beer"],
+   squirrel: true},
+   // and so on...
+];
+
+
+// Mutability
