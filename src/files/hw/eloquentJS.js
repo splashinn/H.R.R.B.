@@ -815,3 +815,91 @@ in a standard JavaScript environment. We have to sum two fields from
 the table to get fields like n1• because the sums of rows or columns are
 not stored directly in our data structure.
 */
+
+
+// Objects as Maps
+/* One possible way is to store all the correlations in an array,
+using objects with name and value properties. But that makes looking
+up the correlation for a given event somewhat cumbersome: you’d have
+to loop over the whole array to find the object with the right name.
+We could wrap this lookup process in a function, but we would still
+be writing more code, and the computer would be doing more work than
+necessary.
+
+A better way is to use object properties named after the event types.
+We can use the square bracket access notation to create and read the
+properties and can use the in operator to test whether a given property
+exists.
+*/
+var map = {};
+function storePhi(event, phi) {
+  map[event] = phi;
+}
+
+storePhi("pizza", 0.069);
+storePhi("touched tree", -0.081);
+console.log("pizza" in map); // → true
+console.log(map["touched tree"]); // → -0.081
+// A map is a way to go from values in one domain to corresponding values in another domain.
+
+/* What if we want to find all the events for which we have stored a
+coefficient? The properties don’t form a predictable series, like
+they would in an array, so we can not use a normal for loop.
+JavaScript provides a loop construct specifically for going over
+the properties of an object. It looks a little like a normal for loop
+but distinguishes itself by the use of the word in.
+*/
+for (var event in map)
+  console.log("The correlation for '" + event + "' is " + map[event]); // → The correlation for 'pizza' is 0.069,
+// The correlation for 'touched tree' is -0.081
+
+
+// Further Arrayology
+// We've covered push and pop, the corresponding methods for adding/removing things
+// at the start of an array are called unshift and shit.
+var todoList = [];
+function rememberTo(task) {
+  todoList.push(task);
+}
+function whatIsNext() {
+  return todoList.shift();
+}
+function urgentlyRememberTo(task) {
+  todoList.unshift(task);
+}
+/* The previous program manages lists of tasks. You add tasks to the end of the list by
+calling rememberTo("eat"), and when you’re ready to do something, you call whatIsNext()
+to get (and remove) the front item from the list. The urgentlyRememberTo function also
+adds a task but adds it to the front instead of the back of the list.
+*/
+
+// The indexOf method has a sibling called lastIndexof, which starts searching for the given element at the end of the array instead of the front.
+console.log([1, 2, 3, 2, 1].indexOf(2)); // -> 1
+console.log([1, 2, 3, 2, 1].lastIndexOf(2)); // -> 3
+// Both indexOf and lastIndexOf take an optional second argument that indicates where to start searching from.
+
+/* Another fundamental method is slice, which takes a start index and an
+end index and returns an array that has only the elements between those
+indices. The start index is inclusive, the end index exclusive.
+*/
+console.log([0, 1, 2, 3, 4].slice(2, 4)); // → [2, 3]
+console.log([0, 1, 2, 3, 4].slice(2)); // → [2, 3, 4]
+/* When the end index is not given, slice will take all of the
+elements after the start index. Strings also have a slice method, which has a similar effect.
+*/
+
+
+/* The concat method can be used to glue arrays together,
+similar to what the + operator does for strings. The following
+example shows both concat and slice in action. It takes an array
+and an index, and it returns a new array with is a copy of the
+original array with the element at the given index removed.
+*/
+function remove(array, index) {
+  return array.slice(0, index)
+    .concat(array.slice(index + 1));
+}
+console.log(remove(["a", "b", "c", "d", "e"], 2)); // → ["a", "b", "d", "e"]
+
+
+// Strings and their Properties
