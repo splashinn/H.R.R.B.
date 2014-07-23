@@ -748,3 +748,70 @@ var journal = [
 
 
 // Mutability
+/* We’ve seen that object values can be modified. The types of
+values discussed in earlier chapters, such as numbers, strings,
+and Booleans, are all immutable—it is impossible to change an existing
+value of those types. You can combine them and derive new values
+from them, but when you take a specific string value, that value
+will always remain the same. The text inside it cannot be changed.
+If you have reference to a string that contains "cat", it is not
+possible for other code to change a character in that string to make it spell "rat".
+
+With objects, on the other hand, the content of a value can
+be modified by changing its properties.
+
+When we have two numbers, 120 and 120, we can consider them
+precisely the same number, whether or not they refer to the same
+physical bits. But with objects, there is a difference between having
+two references to the same object and having two different objects that
+contain the same properties. Consider the following code:
+*/
+var object1 = {value: 10};
+var object2 = object1;
+var object3 = {value: 10};
+
+console.log(object1 === object2); // -> true
+console.log(object1 === object3); // -> false
+
+object1.value = 15;
+console.log(object2.value); // -> 15
+console.log(object3.value); // -> 10
+/* The object1 and object2 variables grasp the same object,
+which is why changing object1 also changes the value of object2.
+The variable object3 points to a different object, which initially
+contains the same properties as object1 but lives a separate life.
+
+Correlation is a measure of dependence between variables
+(“variables” in the statistical sense, not the JavaScript sense).
+It is usually expressed as a coefficient that ranges from -1 to 1.
+Zero correlation means the variables are not related, whereas a correlation
+of one indicates that the two are perfectly related—if you know one, you also
+know the other. Negative one also means that the variables are perfectly related
+but that they are opposites—when one is true, the other is false.
+*/
+
+// Computing Correlation
+/* We can represent a two-by-two table in JavaScript with a four-element array
+([76, 9, 4, 1]). We could also use other representations, such as an array
+containing two two-element arrays ([[76, 9], [4, 1]]) or an object with property
+names like "11" and "01", but the flat array is simple and makes the expressions
+that access the table pleasantly short. We’ll interpret the indices to the array
+as two-bit binary numbers, where the rightmost digit refers to the squirrel
+variable and the leftmost digit refers to event variable.
+*/
+// Example function that computes the phi coefficient from an array:
+function phi(table) {
+  return (table[3] * table[0] - table[2] * table[1]) /
+    Math.sqrt((table[2] + table[3]) *
+              (table[0] + table[1]) *
+              (table[1] + table[3]) *
+              (table[0] + table[2]));
+}
+
+console.log(phi([76, 9, 4, 1])); // -> 0.068599434
+/* This is simply a direct translation of the ϕ formula into JavaScript.
+Math.sqrt is the square root function, as provided by the Math object
+in a standard JavaScript environment. We have to sum two fields from
+the table to get fields like n1• because the sums of rows or columns are
+not stored directly in our data structure.
+*/
