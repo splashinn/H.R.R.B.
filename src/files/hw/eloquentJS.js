@@ -941,3 +941,54 @@ console.log(string.charAt(0)); // -> a
 console.log(string[1]); // -> b
 
 // The Arguments Object
+/* Whenever a function is called, a special variable named arguments
+is added to the environment in which the function body runs. This
+variable refers to an object that holds all of the arguments passed
+to the function. Remember that in JavaScript you are allowed to pass
+more (or fewer) arguments to a function than the number of parameters
+the function itself declares.
+*/
+function noArguments() {}
+noArguments(1, 2, 3); // This is okay
+function threeArguments(a, b, c) {}
+threeArguments(); // And so is this
+
+// another example:
+
+function argumentCounter() {
+  console.log("You gave me", arguments.length, "arguments.");
+}
+argumentCounter("Straw man", "Tautology", "Ad hominem"); // → You gave me 3 arguments.
+
+
+// The Math Object
+// Math is a grab-bag of number-related utility functions, such as Math.max (maximum), Math.min (minimum), and Math.sqrt (square root).
+/* If you need to do trigonometry, Math can help. It contains cos (cosine),
+sin (sine), and tan (tangent), as well as their inverse functions, acos, asin,
+and atan. The number π (pi)—or at least the closest approximation that fits in a
+JavaScript number—is available as Math.PI. (There is an old programming tradition
+of writing the names of constant values in all caps.)
+*/
+function randomPointOnCircle(radius) {
+  var angle = Math.random() * 2 * Math.PI;
+  return {x: radius * Math.cos(angle),
+          y: radius * Math.sin(angle)};
+}
+console.log(randomPointOnCircle(2)); // → {x: 0.3667, y: 1.966}
+
+console.log(Math.random()); // → 0.36993729369714856
+console.log(Math.random()); // → 0.727367032552138
+console.log(Math.random()); // → 0.40180766698904335
+
+// The Global Object
+/* The global scope, the space in which global variables live,
+can also be approached as an object in JavaScript. Each global
+variable is present as a property of this object. In browsers,
+the global scope object is stored in the window variable.
+*/
+var myVar = 10;
+console.log("myVar" in window); // → true
+console.log(window.myVar); // → 10
+
+
+// Chapter 5: Higher-Order Functions
