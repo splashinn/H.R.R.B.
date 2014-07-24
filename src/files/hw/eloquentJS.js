@@ -1020,3 +1020,76 @@ forEach(numbers, function(number) {
   sum += number;
 });
 console.log(sum);
+
+// forEach is an available method for use on arrays.
+// forEach takes one required argument: the function to be executed for each element.
+// To illustrate how helpful this really is, lets look at this function:
+function gatherCorrelations(journal) {
+  var phis = {};
+  for (var entry = 0; entry < journal.length; entry++) {
+    var events = journal[entry].events;
+    for (var i = 0; i < events.length; i++) {
+      var event = events[i];
+      if (!(event in phis))
+        phis[event] = phi(tableFor(event, journal));
+    }
+  }
+  return phis;
+}
+// and compare the above function to the same function using forEach:
+function gatherCorrelations(journal) {
+  var phis = {};
+  journal.forEach(function(entry) {
+    entry.events.forEach(function(event) {
+      if (!(event in phis))
+        phis[event] = phi(tableFor(event, journal));
+    });
+  });
+  return phis;
+}
+
+// Higher-Order Functions
+// Functions that operate on other functions, either by taking them as arguments or returning them, are called higher-order functions.
+// Higher-Order Functions allow us to abstract over actions, not just values. They come in several forms.
+// As an example, you can have functions that create new functions:
+function greaterThan(n) {
+  return function(m) {
+    return m > n;
+  };
+}
+var greaterThan10 = greaterThan(10);
+console.log(greaterThan10(11)); // -> true
+
+// Or we can have functions that change other functions:
+function noisy(f) {
+  return function(arg) {
+    console.log("calling with", arg);
+    var val = f(arg);
+    console.log("called with", arg "- got", val);
+    return val;
+  }
+}
+noisy(Boolean)(0); // -> calling w/ 0; -> called with 0 - got false
+
+// Or functions that implement custom types of control flow:
+function unless(test, then) {
+  if (!test) then();
+}
+function repeat(times, body) {
+  for (var i = 0; i < times; i++) body(i);
+}
+repeat(3, function(n) {
+  unless(n % 2, function() {
+    console.log(n, "is even");
+  });
+});
+
+/* In the example above, the n variable is a parameter to the outer function.
+Because the inner function lives inside the environment of the outer one, it
+can use n. The bodies of such inner functions can access the variables around them,
+and play a role similar to the {} blocks used in regular loops and conditional
+statements. An important difference is that variables declared inside inner functions
+do not end up in the environment of the outer function.
+*/
+
+// Passing Along Arguments
