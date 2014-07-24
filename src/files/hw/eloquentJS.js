@@ -992,3 +992,31 @@ console.log(window.myVar); // → 10
 
 
 // Chapter 5: Higher-Order Functions
+// Abstracting Array Traversal
+
+var array = [1, 2, 3];
+for (var i = 0; i < array.length; i++) {
+  var current = array[i];
+  console.log(current);
+}
+// Can be abstracted into this:
+function logEach(array) {
+  for (var i = 0; i < array.length; i++)
+    console.log(array[i]);
+}
+console.log(logEach([1, 2, 3, 4]));
+
+// If you want to do something other than logging the elements,
+// the actions can be passed as a function value.
+function forEach(array, action) {
+  for (var i = 0; i < array.length; i++)
+    action(array[i]);
+}
+
+
+
+var numbers = [1, 2, 3, 4, 5], sum = 0;
+forEach(numbers, function(number) {
+  sum += number;
+});
+console.log(sum);
