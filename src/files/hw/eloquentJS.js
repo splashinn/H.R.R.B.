@@ -1256,6 +1256,47 @@ console.log(average(ancestry.filter(female).map(age)));
 
 /* Binding
 
+The bind method creates a new function that will call the original function, but with some
+of the arguments already fixed.
 
+The code below shows an example of bind in use. First it defines a function isInSet that
+tells us whether a person is in a given set of strings. To call filter in order to collect
+those person objects whose names are in a specific set, we can either write a function
+expression that makes a call to isInSet with our set as its first argument, or partially
+apply the isInSet function.
+*/
 
+var theSet = ["Carel Haverbeke", "Maria van Brussel",
+              "Donald Duck"];
+function isInSet(set, person) {
+  return set.indexOf(person.name) > -1;
+}
+
+console.log(ancestry.filter(function(person) {
+  return isInSet(theSet, person);
+}));
+console.log(ancestry.filter(isInSet.bind(null, theSet)));
+
+/* The above bind call returns a function that will call isInSet with theSet as first argument,
+followed by any remaining arguments given to the bound function.
+
+The first argument, where the example passes null, is used for method calls, similar
+to the first argument to apply
+
+----------------------------------------
+
+To Summarize:
+
+Being able to pass function values to other functions is not just a gimmick, but a deeply
+useful aspect of JavaScript. It allows us to write computations with “gaps” in them as functions,
+and have the code that calls these functions fill in those gaps by providing function values that
+describe the missing computations.
+
+Arrays provide a number of very useful higher-order methods—forEach to do something with each
+element in an array, filter to build a new array with some elements filtered out, map to build a
+new array where each element has been put through a function, and reduce to combine all an array’s
+elements into a single value.
+
+Functions have an apply method that can be used to call them with an array specifying their arguments.
+They also have a bind method, which is used to create a partially applied version of the function.
 */
