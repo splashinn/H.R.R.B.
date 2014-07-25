@@ -1222,3 +1222,40 @@ console.log(ancestry.reduce(function(min, cur) {
     return min;
   }
 }));
+
+
+
+/* Composability
+
+Higher-order functions start to shine when you need to compose functions.
+As an example, lets write code that finds the average age for men and women
+in the data set:
+*/
+function average(array) {
+  function plus(a, b) {
+    return a + b;
+  }
+  return array.reduce(plus) / array.length;
+}
+function age(p) {
+  return p.died - p.born;
+}
+function male(p) {
+  return p.sex == "m";
+}
+function female(p) {
+  return p.sex == "f";
+}
+console.log(average(ancestry.filter(male).map(age)));
+console.log(average(ancestry.filter(female).map(age)));
+// In JS, operators are not values so they cannot be passed as arguments.
+
+// Instead of tangling the logic into a big loop, it is neatly composed
+// into the concepts we are interested in—determining sex, computing age, averaging numbers.
+
+
+/* Binding
+
+
+
+*/
