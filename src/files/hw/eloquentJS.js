@@ -1093,3 +1093,35 @@ do not end up in the environment of the outer function.
 */
 
 // Passing Along Arguments
+// The noisy function above has a serious deficit.
+function noisy(f) {
+  return function(arg) {
+    console.log("calling with", arg);
+    var val = f(arg);
+    console.log("called with", arg, "- got", val);
+    return val;
+  };
+}
+/* If f takes more than one parameter, it only gets the first one.
+We could add a bunch of arguments to the inner function (arg1, arg2, and so on)
+and pass them all to f, it is not clear how many would be enough.
+This solution would also deprive f of the information in arguments.length.
+Since we’d always pass the same number of arguments, it wouldn’t know
+how many argument were originally given.
+
+For these situations, JS functions have an apply method. You pass it an array
+(or an array like object) of arguments, and it will call the function with those
+arguments.
+*/
+
+function transparentWrapping(f) {
+  return function() {
+    return f.apply(null, arguments);
+  };
+}
+/* Above is a useless function, but it shows the pattern we are interested in.
+The function it returns passes all of the given arguments, and only those arguments
+, to f. It does this by passing its own arguments object to apply.
+The first argument to apply, for which we are passing null here, can be used to simulate
+a method call.
+*/
