@@ -1156,4 +1156,69 @@ console.log(ancestry.filter(function(person) {
 }));
 
 
-// Transforming with Map
+/* Transforming with Map
+
+
+The map method transforms an array by applying a function to all of its
+elements, and building a new array from the returned values. The new array
+will have the same length as the input array, but its content will have been
+"mapped" to a new form by the function.
+*/
+function map(array, transform) {
+  var mapped = [];
+  for (var i = 0; i < array.length; i++) {
+    mapped.push(transform(array[i]));
+  }
+  return mapped;
+}
+
+var overNinety = ancestry.filter(function(person) {
+  return person.died - person.born > 90;
+});
+console.log(map(overNinety, function(person) {
+  return person.name;
+}));
+
+// Like forEach and filter, map is also a standard method on arrays.
+
+/* Summarizing with Reduce
+
+Another common pattern of computation on arrays is computing a single
+value from them. Our recurring example, summing a collection of numbers,
+is an instance of this.
+
+The higher-order operation that represents this pattern is called reduce,
+or sometimes fold. It can be thought of as folding up the array, one element
+at a time. When summing numbers, you'd start w/ zero, and for each element,
+combine it with the current sum by adding the two.
+
+The parameters to the reduce function are, apart from the array, a combining
+function and a start value. This function is a little less straightforward than
+filter and map, so pay careful attention.
+*/
+function reduce(array, combine, start) {
+  var current = start;
+  for (var i = 0; i < array.length; i++) {
+    current = combine(current, array[i]);
+  }
+  return current;
+}
+console.log(reduce([1, 2, 3, 4], function(a, b) {
+  return a + b;
+}, 0));
+
+/* The standard array method reduce, which of course corresponds to this function,
+has an added convenience. If your array contains at least one element, you are
+allowed to leave off the start argument. The method will take the first element of
+the array as its start value, and start reducing at the second element.
+
+For example, using reduce to find the most ancient known ancestor, we can write something
+like this:
+*/
+console.log(ancestry.reduce(function(min, cur) {
+  if (cur.born < min.born) {
+    return cur;
+  } else {
+    return min;
+  }
+}));
