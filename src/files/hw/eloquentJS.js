@@ -1125,3 +1125,35 @@ The function it returns passes all of the given arguments, and only those argume
 The first argument to apply, for which we are passing null here, can be used to simulate
 a method call.
 */
+
+// Filtering an Array
+/* To find people in an ancestry data set that were young in 1924, the following function
+might be helpful. It filters out the elements in an array that don't pass a test.
+*/
+function filter(array, test) {
+  var passed = [];
+  for (var i = 0; i < array.length; i++) {
+    if (test(array[i]))
+      passed.push(array[i]);
+  }
+  return passed;
+}
+console.log(filter(ancestry, function(person) {
+  return person.born > 1900 && person.born < 1925;
+}));
+/* This function uses the argument named test, a function value, to fill in a gap in the
+computation. The test function is called for each element, and its return value determines
+whether an element is included in the returned array or not.
+
+Note how the filter function, rather than delete elements from the existing array, builds up a new array
+w/ only elements that pass the test. This function is pure and it does not modify the array it's given.
+
+Like forEach, filter is also a standard method on arrays. The example defined the function only in
+order to show what it does internally. From now on, we’ll use it like this instead:
+*/
+console.log(ancestry.filter(function(person) {
+  return person.father == "";
+}));
+
+
+// Transforming with Map
