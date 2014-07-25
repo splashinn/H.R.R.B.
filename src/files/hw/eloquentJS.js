@@ -1300,3 +1300,15 @@ elements into a single value.
 Functions have an apply method that can be used to call them with an array specifying their arguments.
 They also have a bind method, which is used to create a partially applied version of the function.
 */
+
+
+
+
+
+/*
+
+----------------------------------------
+Chapter 6: The secret life of objects
+----------------------------------------
+
+*/
