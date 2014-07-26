@@ -1310,5 +1310,72 @@ They also have a bind method, which is used to create a partially applied versio
 ----------------------------------------
 Chapter 6: The secret life of objects
 ----------------------------------------
+This chapter describes JS's rather eccentric take on objects, and the way they relate to some classical
+object oriented techniques.
+*/
 
+// Methods: methods are simply properties that hold function values. An example:
+var rabbit = {};
+rabbit.speak = function(line) {
+  console.log("The rabbit says '" + line + "'");
+};
+rabbit.speak("I'm alive!"); // -> The rabbit says 'I'm alive!'
+
+// This code uses the this keyword to output the type of rabbit that is speaking:
+function speak(line) {
+  console.log("The " + this.type + " rabbit says '" + line + "'");
+}
+var whiteRabbit = { type: "white", speak: speak};
+var fatRabbit = {type: "fat", speak: speak};
+
+whiteRabbit.speak("Oh my ears and whiskers, " +
+                  "how late it's getting!");
+// → The white rabbit says 'Oh my ears and whiskers, how late it's getting!'
+fatRabbit.speak("I could sure use a carrot right now.");
+// → The fat rabbit says 'I could sure use a carrot right now.'
+
+
+/* Recall that the apply and bind methods both take a first argument
+that can be used to simulate method calls. This first argument is in
+fact used to give a value to this.
+
+Recall that the apply and bind methods both take a first argument that
+can be used to simulate method calls. This first argument is in fact used
+to give a value to this.
+*/
+speak.apply(fatRabbit, ["Burp!"]); // → The fat rabbit says 'Burp!'
+speak.call({type: "old"}, "Oh my."); // → The old rabbit says 'Oh my.'
+
+
+// Prototypes
+
+// Check out this example:
+var empty = {};
+console.log(empty.toString); // → function toString(){…}
+console.log(empty.toString()); // → [object Object]
+
+// Object.prototype
+
+console.log(Object.getPrototypeOf({}) == Object.prototype); // -> true
+console.log(Object.getPrototypeOf(Object.prototype)); // -> null
+// Object.getPrototypeOf function returns the prototype of an object.
+
+/* The prototype relations of JavaScript objects form a tree-shaped structure,
+and at the root of this structure sits Object.prototype. It provides a few
+methods that show up in all objects, such as toString, which converts an object
+to a string representation.
+
+Many objects don’t directly have Object.prototype as their prototype, but instead
+have another object, which provides its own default properties. Functions derive
+from Function.prototype, arrays from Array.prototype.
+*/
+
+console.log(Object.getPrototypeOf(isNaN) == Function.prototype); // -> true
+console.log(Object.getPrototypeOf([]) == Array.prototype); // -> true
+
+// Such a prototype object will itself have a prototype, often Object.prototype so that
+// it still indirectly provides methods like toString.
+
+/* The Object.getPrototypeOf function obviously returns the prototype of an object.
+You can use Object.create to create an object with a specific prototype:
 */
